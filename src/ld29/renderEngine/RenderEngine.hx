@@ -2,13 +2,22 @@ package ld29.renderEngine;
 
 import flash.display.Bitmap;
 import flash.display.BitmapData;
+import flash.display.GradientType;
 import flash.display.PixelSnapping;
+import flash.display.Shape;
 import flash.display.Sprite;
 import flash.geom.Matrix;
 import flash.geom.Point;
 import ld29.entities.Entity;
 import ld29.entities.Ground;
+import ld29.renderEngine.RenderEngine.BGBD;
 import ld29.settings.StageSettings;
+
+@:bitmap("ld29/assets/bg.png")
+class BGBD extends flash.display.BitmapData
+{
+    
+}
 
 /**
  * ...
@@ -22,7 +31,10 @@ class RenderEngine extends Bitmap
 	
 	public function new() 
 	{
-		_bg = new BitmapData( StageSettings.W, StageSettings.H, false, 0xCC00CC );
+		_bg = new BGBD( StageSettings.W, StageSettings.H, false );//new BitmapData( StageSettings.W, StageSettings.H, false, 0xCC00CC );
+		
+		
+		
 		_renderBD = new BitmapData( StageSettings.W, StageSettings.H, false, 0x000000 );
 		super( _renderBD, PixelSnapping.NEVER, false );
 	}

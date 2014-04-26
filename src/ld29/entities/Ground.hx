@@ -56,7 +56,7 @@ class Ground
 		_normal.setTo( _y1 - y, _x2 - x );
 		_normal.normalize( 1 );
 		
-		_direction.setTo( x - _x2, y - _y1 );
+		_direction.setTo( x - _x2, _y1 - y );
 		_direction.normalize( 1 );
 		
 		/*_p1 = new Point(x, _y1);
@@ -64,7 +64,7 @@ class Ground
 		_p3 = new Point(StageSettings.W, StageSettings.H);*/
 		
 		shape.graphics.clear();
-		shape.graphics.lineStyle( 10, 0xFF0000, 1, false, LineScaleMode.VERTICAL, CapsStyle.NONE, JointStyle.MITER, 10);
+		//shape.graphics.lineStyle( 10, 0xFF0000, 1, false, LineScaleMode.VERTICAL, CapsStyle.NONE, JointStyle.MITER, 10);
 		shape.graphics.beginFill( 0xFFD700, 1 );
 		shape.graphics.moveTo(0, StageSettings.H - y);
 		shape.graphics.lineTo(StageSettings.W - x, 0);

@@ -13,6 +13,8 @@ class Entity
 	public static inline var TYPE_GRAPHIC_UNDER:UInt = 2;
 	public static inline var TYPE_GRAPHIC_OVER:UInt = 3;
 	
+	public var onGround:Bool = false;
+	
 	public var x:Float;
 	public var y:Float;
 	
@@ -25,6 +27,7 @@ class Entity
 	public var type:UInt;
 	
 	public var graphic:Graphic;
+	public var anchorY:Float;
 	
 	public function new( width:UInt, height:UInt ) 
 	{
@@ -33,6 +36,7 @@ class Entity
 		
 		vX = 0;
 		vY = 0;
+		anchorY = height - 4;
 	}
 	
 	public function updateInputs():Void

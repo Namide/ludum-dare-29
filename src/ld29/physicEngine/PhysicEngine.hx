@@ -24,6 +24,14 @@ class PhysicEngine
 		var x:Float, y:Float;
 		for ( entity in entities )
 		{
+			if ( entity.type == Entity.TYPE_GRAPHIC_UNDER )
+			{
+				continue;
+			}
+			
+			if ( entity.onGround ) entity.onGround = false;
+			
+			
 			
 			entity.vY += G;
 			entity.x += entity.vX;
@@ -34,11 +42,12 @@ class PhysicEngine
 			}
 			
 			x = entity.x + entity.w * 0.5;
-			y = entity.y + entity.h - 4;
+			y = entity.y + entity.anchorY;
 			if ( ground.isUnder( x, y ) )
 			{
-				entity.y = ground.getY(x) + 4 - entity.h;
+				entity.y = ground.getY(x) - entity.anchorY;
 				entity.vY = 0;
+				entity.onGround = true;
 			}
 			
 		}
@@ -50,8 +59,13 @@ class PhysicEngine
 		var p:Point = new Point();
 		for ( entity in entities )
 		{
+			if ( entity.type == Entity.TYPE_GRAPHIC_UNDER )
+			{
+				continue;
+			}
+			
 			x = entity.x + entity.w * 0.5;
-			y = entity.y + entity.h - 4;
+			y = entity.y + entity.anchorY;
 			if ( (entity.vY > 0 || entity.vX > 0) && ground.isUnder( x, y ) )
 			{
 				p.setTo( entity.vX, entity.vY );
