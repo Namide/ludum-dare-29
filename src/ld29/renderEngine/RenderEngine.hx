@@ -27,22 +27,34 @@ class RenderEngine extends Bitmap
 		super( _renderBD, PixelSnapping.NEVER, false );
 	}
 	
-	public function refresh( entities:Array<Entity>, ground:Ground )
+	public function refresh( entities:Iterable<Entity>, ground:Ground )
 	{
 		var m:Matrix = new Matrix();
 		var p:Point = new Point();
 		_renderBD.copyPixels( _bg, _bg.rect, p );
 		
-		m.createBox(1, 1, 0, ground.getX(), ground.getY() );
-		_renderBD.draw( ground.shape, m );
+		var groundDrawed:Bool = false;
 		
 		for ( entity in entities )
 		{
+			if ( !groundDrawed && entity.type != Entity.TYPE_GRAPHIC_UNDER )
+			{
+				groundDrawed = drawGround(ground, m);
+			}
+			
 			p.setTo( entity.x, entity.y );
 			var bd:BitmapData = entity.graphic.bd;
 			_renderBD.copyPixels( bd, bd.rect, p, bd.transparent );
 		}
 		bitmapData = _renderBD;
 	}
+	
+	private function drawGround(ground:Ground, m:Matrix)
+	{
+		m.createBox(1, 1, 0, ground.x, ground.y );
+		_renderBD.draw( ground.shape, m );
+		return true;
+	}
+	
 	
 }
