@@ -1,4 +1,5 @@
 package ld29.renderEngine.components;
+import flash.display.BitmapData;
 
 /**
  * ...
@@ -7,9 +8,11 @@ package ld29.renderEngine.components;
 class Graphic
 {
 
-	public function new() 
+	public var bd:BitmapData;
+	
+	public function new( width:UInt, height:UInt, alpha:Bool = false ) 
 	{
-		
+		bd = new BitmapData( width, height, alpha, 0xFF00FF00 );
 	}
 	
 }
