@@ -12,7 +12,7 @@ class Graphic
 	
 	public function new( width:UInt, height:UInt, alpha:Bool = false ) 
 	{
-		bd = new BitmapData( width, height, alpha, 0xFF00FF00 );
+		bd = new BitmapData( width, height, alpha, 0x0000FF00 );
 	}
 	
 }

@@ -31,12 +31,9 @@ class RenderEngine extends Bitmap
 	
 	public function new() 
 	{
-		_bg = new BGBD( StageSettings.W, StageSettings.H, false );//new BitmapData( StageSettings.W, StageSettings.H, false, 0xCC00CC );
-		
-		
-		
+		_bg = new BGBD( StageSettings.W, StageSettings.H, false );
 		_renderBD = new BitmapData( StageSettings.W, StageSettings.H, false, 0x000000 );
-		super( _renderBD, PixelSnapping.NEVER, false );
+		super( _renderBD, PixelSnapping.ALWAYS, false );
 	}
 	
 	public function refresh( entities:Iterable<Entity>, ground:Ground )
@@ -63,7 +60,7 @@ class RenderEngine extends Bitmap
 	
 	private function drawGround(ground:Ground, m:Matrix)
 	{
-		m.createBox(1, 1, 0, ground.x, ground.y );
+		m.createBox( 1, 1, 0, ground.x, ground.y );
 		_renderBD.draw( ground.shape, m );
 		return true;
 	}

@@ -21,7 +21,7 @@ class BackgroundSquare extends Entity
 		
 		var width:UInt = Math.round(8 + 32 * near);
 		var height:UInt = Math.round(8 + 32 * near);
-		_velocity = 1 + 5 * near;
+		_velocity = StageSettings.SPEED_BACK + near * ( StageSettings.SPEED_IN - StageSettings.SPEED_BACK );
 		
 		
 		super(width, height);
@@ -29,7 +29,13 @@ class BackgroundSquare extends Entity
 		type = Entity.TYPE_GRAPHIC_UNDER;
 		
 		graphic = new Graphic( width, height, true );
-		graphic.bd.fillRect( graphic.bd.rect, 0x66CCCCCC );
+		
+		var color:UInt =  ( Math.round( Math.random() * 0x55 ) << 24 );
+		color |= ( Math.round( Math.random() * 0xFF ) << 16 );
+		color |= (Math.round ( Math.random() * 0xFF ) << 8 );
+		color |= (Math.round ( Math.random() * 0xFF ) << 0 );
+		
+		graphic.bd.fillRect( graphic.bd.rect, color );
 		
 		
 		
@@ -59,10 +65,10 @@ class BackgroundSquare extends Entity
 		
 	}
 	
-	public override function updateInputs():Void
+	public override function updateInputs( speed:Float ):Void
 	{
-		x += _direction.x * _velocity;
-		y += _direction.y * _velocity;
+		x += _direction.x * _velocity * speed;
+		y += _direction.y * _velocity * speed;
 		//trace(_direction);
 		
 		if ( y > StageSettings.H ) init();

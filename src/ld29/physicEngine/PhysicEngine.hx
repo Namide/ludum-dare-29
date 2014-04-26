@@ -24,7 +24,8 @@ class PhysicEngine
 		var x:Float, y:Float;
 		for ( entity in entities )
 		{
-			if ( entity.type == Entity.TYPE_GRAPHIC_UNDER )
+			if ( entity.type == Entity.TYPE_GRAPHIC_UNDER || 
+				 entity.type == Entity.TYPE_GRAPHIC_OVER	)
 			{
 				continue;
 			}

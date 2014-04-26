@@ -8,6 +8,7 @@ import ld29.entities.BackgroundSquare;
 import ld29.entities.EntitiesContainer;
 import ld29.entities.Entity;
 import ld29.entities.Ground;
+import ld29.entities.OverSquare;
 import ld29.entities.Player;
 import ld29.physicEngine.PhysicEngine;
 import ld29.renderEngine.RenderEngine;
@@ -30,6 +31,7 @@ class GameEngine extends Sprite
 	private var _ground:Ground;
 	
 	private var _player:Player;
+	private var _speed:Float;
 	
 	private var _slope:Point;
 	
@@ -62,7 +64,11 @@ class GameEngine extends Sprite
 			var rock:Entity = new BackgroundSquare( _slope );
 			_entitiesContainer.add( rock );
 		}
-		
+		for ( i in 0...100 )
+		{
+			var rock:Entity = new OverSquare( _slope, _ground );
+			_entitiesContainer.add( rock );
+		}
 		
 		addEventListener( Event.ENTER_FRAME, onEnterFrame );
 		addStageListeners();
@@ -106,18 +112,20 @@ class GameEngine extends Sprite
 	
 	private inline function randomize(t:UInt):Float
 	{
+		//return (Math.sin( t * 0.1 ) + 1) * 0.5;
 		return (Math.sin( t * 0.001 ) + 1) * 0.5;
 	}
 	public function refresh():Iterable<Entity>
 	{
 		_gameTime += 1;
 		_ground.setDiagonal( randomize(_gameTime) * StageSettings.W * 0.5 , (1 - randomize(_gameTime) ) * StageSettings.H * 0.5 );
+		_speed = 1 + _gameTime / 10000;
 		
 		var allEntities:Iterable<Entity> = _entitiesContainer.getAll();
 		
 		for ( entity in allEntities )
 		{
-			entity.updateInputs();
+			entity.updateInputs( _speed );
 		}
 		
 		_physicEngine.updatePos( allEntities, _ground );

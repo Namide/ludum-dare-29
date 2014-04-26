@@ -36,10 +36,10 @@ class Entity
 		
 		vX = 0;
 		vY = 0;
-		anchorY = height - 4;
+		anchorY = height - 1;
 	}
 	
-	public function updateInputs():Void
+	public function updateInputs( speed:Float ):Void
 	{
 		
 	}

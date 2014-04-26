@@ -12,7 +12,7 @@ class Player extends Entity
 {
 
 	private var vxMax:Float = 10;
-	private var vyMax:Float = 16;
+	private var vyMax:Float = 13;
 	
 	public function new(width:UInt, height:UInt) 
 	{
@@ -21,13 +21,13 @@ class Player extends Entity
 		type = Entity.TYPE_PLAYER;
 		
 		graphic = new Graphic( width, height, true );
-		graphic.bd.fillRect( graphic.bd.rect, 0xFFFF0000 );
+		graphic.bd.fillRect( graphic.bd.rect, 0xFFc28700 );
 		
 		x = StageSettings.W * 0.5;
 		y = StageSettings.H * 0.5;
 	}
 	
-	public override function updateInputs():Void
+	public override function updateInputs( speed:Float ):Void
 	{
 		var kh:KeyboardHandler = KeyboardHandler.getInstance();
 		

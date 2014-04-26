@@ -1,8 +1,11 @@
 package ld29.entities;
 import flash.display.CapsStyle;
+import flash.display.GradientType;
 import flash.display.JointStyle;
 import flash.display.LineScaleMode;
 import flash.display.Shape;
+import flash.display.SpreadMethod;
+import flash.geom.Matrix;
 import flash.geom.Point;
 import ld29.settings.StageSettings;
 
@@ -65,12 +68,22 @@ class Ground
 		
 		shape.graphics.clear();
 		//shape.graphics.lineStyle( 10, 0xFF0000, 1, false, LineScaleMode.VERTICAL, CapsStyle.NONE, JointStyle.MITER, 10);
-		shape.graphics.beginFill( 0xFFD700, 1 );
+		//shape.graphics.beginFill( 0xFFD700, 1 );
+		var m:Matrix = new Matrix();
+		m.createGradientBox( StageSettings.W-x, StageSettings.H-y, Math.PI/4, 0, 0 );
+		shape.graphics.beginGradientFill( 	GradientType.LINEAR,
+											[0xFFFFFF, 0x6ea4b0, 0x1a4454, 0x031020],
+											[1, 1, 1, 1],
+											[127, 170, 210, 255],
+											m, SpreadMethod.PAD);
+		
 		shape.graphics.moveTo(0, StageSettings.H - y);
 		shape.graphics.lineTo(StageSettings.W - x, 0);
 		shape.graphics.lineTo(StageSettings.W - x, StageSettings.H - y);
 		shape.graphics.lineTo(0, StageSettings.H - y); 
 		shape.graphics.endFill();
+		
+		
 	}
 	
 	/*public inline function getX():Float { return x; }

@@ -14,6 +14,10 @@ class StageSettings
 	public static inline var W:UInt = 640;
 	public static inline var H:UInt = 360;
 	
+	public static inline var SPEED_BACK:Float = 1;
+	public static inline var SPEED_IN:Float = 5;
+	public static inline var SPEED_OVER:Float = 10;
+	
 	public function new() 
 	{
 		throw new Error( "static class!" );
