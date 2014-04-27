@@ -34,7 +34,7 @@ class PhysicEngine
 			
 			
 			
-			entity.vY += G;
+			entity.vY += G * entity.weight;
 			entity.x += entity.vX;
 			entity.y += entity.vY;
 			if ( entity.type == Entity.TYPE_PLAYER )

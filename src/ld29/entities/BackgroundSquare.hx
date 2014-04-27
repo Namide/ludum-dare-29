@@ -19,8 +19,8 @@ class BackgroundSquare extends Entity
 	{
 		var near:Float = Math.random();
 		
-		var width:UInt = Math.round(8 + 32 * near);
-		var height:UInt = Math.round(8 + 32 * near);
+		var width:UInt = Math.round(1 + 8 * near);
+		var height:UInt = Math.round(1 + 8 * near);
 		_velocity = StageSettings.SPEED_BACK + near * ( StageSettings.SPEED_IN - StageSettings.SPEED_BACK );
 		
 		

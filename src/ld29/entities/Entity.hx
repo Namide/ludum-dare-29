@@ -29,6 +29,8 @@ class Entity
 	public var graphic:Graphic;
 	public var anchorY:Float;
 	
+	public var weight:Float;
+	
 	public function new( width:UInt, height:UInt ) 
 	{
 		w = width;
@@ -37,6 +39,8 @@ class Entity
 		vX = 0;
 		vY = 0;
 		anchorY = height - 1;
+		
+		weight = 1;
 	}
 	
 	public function updateInputs( speed:Float ):Void

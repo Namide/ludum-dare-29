@@ -10,6 +10,7 @@ import ld29.entities.Entity;
 import ld29.entities.Ground;
 import ld29.entities.OverSquare;
 import ld29.entities.Player;
+import ld29.entities.Rock;
 import ld29.physicEngine.PhysicEngine;
 import ld29.renderEngine.RenderEngine;
 import ld29.settings.StageSettings;
@@ -39,36 +40,52 @@ class GameEngine extends Sprite
 	{
 		super();
 		
+		// TIME
 		_lastRealTime = Lib.getTimer();
 		_restTime = 0;
 		_gameTime = 0;
 		
+		// CONTAINER
 		_entitiesContainer = new EntitiesContainer();
 		
 		
+		// GROUND
 		_ground = new Ground();
 		_ground.setDiagonal( 200, 100 );
 		_slope = _ground.getDirection();
 		
+		
+		// PLAYER
 		_player = new Player( 16, 16 );
 		_entitiesContainer.add( _player );
 		
-		_renderEngine = new RenderEngine();
-		addChild( _renderEngine );
 		
-		_physicEngine = new PhysicEngine();
-		
-		
-		for ( i in 0...100 )
+		// GRAPHIC
+		for ( i in 0...300 )
 		{
 			var rock:Entity = new BackgroundSquare( _slope );
 			_entitiesContainer.add( rock );
 		}
-		for ( i in 0...100 )
+		for ( i in 0...25 )
 		{
 			var rock:Entity = new OverSquare( _slope, _ground );
 			_entitiesContainer.add( rock );
 		}
+		
+		
+		// ROCKS
+		var rock:Entity = new Rock( _slope, _ground );
+		_entitiesContainer.add( rock );
+		
+		
+		// RENDER
+		_renderEngine = new RenderEngine();
+		addChild( _renderEngine );
+		
+		
+		//PHYSIC
+		_physicEngine = new PhysicEngine();
+		
 		
 		addEventListener( Event.ENTER_FRAME, onEnterFrame );
 		addStageListeners();

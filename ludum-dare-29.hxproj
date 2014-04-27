@@ -5,11 +5,11 @@
     <movie outputType="Application" />
     <movie input="" />
     <movie path="bin\ludumdare29.swf" />
-    <movie fps="120" />
+    <movie fps="60" />
     <movie width="640" />
     <movie height="360" />
     <movie version="11" />
-    <movie minorVersion="4" />
+    <movie minorVersion="8" />
     <movie platform="Flash Player" />
     <movie background="#000000" />
   </output>

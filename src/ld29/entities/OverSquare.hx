@@ -7,11 +7,13 @@ import ld29.core.KeyboardHandler;
 import ld29.renderEngine.components.Graphic;
 import ld29.settings.StageSettings;
 
+/*
 @:bitmap("ld29/assets/bg-over.png")
 class OverBD extends flash.display.BitmapData
 {
     
 }
+*/
 
 /**
  * ...

@@ -115,7 +115,7 @@ class Ground
 	{
 		//var v:Float = direction.length;
 		var d:Float = 2 * (direction.x * _normal.x + direction.y * _normal.y);
-		if ( d > 10 || d < -10 ) trace(d, direction.x, direction.y, _normal);
+		//if ( d > 10 || d < -10 ) trace(d, direction.x, direction.y, _normal);
 		direction.x = direction.x - d * _normal.x;
 		direction.y = direction.y - d * _normal.y;
 		return direction;
