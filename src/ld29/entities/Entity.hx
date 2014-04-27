@@ -14,6 +14,7 @@ class Entity
 	public static inline var TYPE_GRAPHIC_OVER:UInt = 3;
 	
 	public var onGround:Bool = false;
+	public var onRock:Bool = false;
 	
 	public var x:Float;
 	public var y:Float;

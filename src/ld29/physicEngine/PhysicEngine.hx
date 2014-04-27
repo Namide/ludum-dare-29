@@ -1,8 +1,10 @@
 package ld29.physicEngine;
 import flash.geom.Point;
+import ld29.core.SoundManager;
 import ld29.entities.Entity;
 import ld29.entities.Ground;
 import ld29.entities.Player;
+import ld29.settings.StageSettings;
 
 /**
  * ...
@@ -22,6 +24,8 @@ class PhysicEngine
 	
 	public function updateCollide( player:Player, rocks:Iterable<Entity> ):Void
 	{
+		if( player.onRock ) player.onRock = false;
+		
 		for ( rock in rocks )
 		{
 			if ( player.hitTest(rock) )
@@ -29,9 +33,7 @@ class PhysicEngine
 				var x:Float = (rock.x + rock.w) - (player.x + player.w);
 				var y:Float = (rock.y + rock.h) - (player.y + player.h);
 				
-				//trace( x, y );
-				
-				if ( Math.abs(y) > Math.abs(x) )
+				if ( Math.abs(y) < Math.abs(x) )
 				{
 					if ( x < 0 )
 					{
@@ -56,6 +58,8 @@ class PhysicEngine
 					{
 						player.y = rock.y - player.h;
 						if ( player.vY > 0 ) player.vY = rock.vY;
+						
+						player.onRock = true;
 					}
 					player.vX = rock.vX;
 				}
@@ -93,6 +97,13 @@ class PhysicEngine
 				entity.y = ground.getY(x) - entity.anchorY;
 				entity.vY = 0;
 				entity.onGround = true;
+				
+				if (	entity.type == Entity.TYPE_ROCK &&
+						entity.y + entity.h > 0 &&
+						entity.y < StageSettings.H )
+				{
+					SoundManager.getInstance().playRandom();
+				}
 			}
 			
 		}

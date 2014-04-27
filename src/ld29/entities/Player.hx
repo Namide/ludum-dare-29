@@ -1,6 +1,7 @@
 package ld29.entities;
 import flash.ui.Keyboard;
 import ld29.core.KeyboardHandler;
+import ld29.core.SoundManager;
 import ld29.renderEngine.components.Graphic;
 import ld29.settings.StageSettings;
 
@@ -38,7 +39,11 @@ class Player extends Entity
 		}
 		else if ( kh.getKeyPressed( Keyboard.RIGHT ) ) vX = vxMax;
 		
-		if ( onGround && kh.getKeyPressed( Keyboard.SPACE ) ) vY = -vyMax;
+		if ( (onGround || onRock) && kh.getKeyPressed( Keyboard.SPACE ) )
+		{
+			SoundManager.getInstance().play( SoundManager.SAMPLE_TUONG );
+			vY = -vyMax;
+		}
 	}
 	
 }

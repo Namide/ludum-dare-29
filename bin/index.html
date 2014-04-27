@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8"/>
-	<title>ludum-dare-29</title>
+	<title>Mount!</title>
 	<meta name="description" content="" />
 	
 	<script src="js/swfobject.js"></script>
@@ -14,7 +14,7 @@
 			scale: "noScale",
 			allowFullscreen: "true",
 			allowScriptAccess: "always",
-			bgcolor: "",
+			bgcolor: "#000",
 			wmode: "direct" // can cause issues with FP settings & webcam
 		};
 		var attributes = {
@@ -22,19 +22,50 @@
 		};
 		swfobject.embedSWF(
 			"ludumdare29.swf", 
-			"altContent", "100%", "100%", "10.0.0", 
+			"altContent", "640", "360", "10.0.0", 
 			"expressInstall.swf", 
 			flashvars, params, attributes);
 	</script>
 	<style>
-		html, body { height:100%; overflow:hidden; }
-		body { margin:0; }
+		html{color:#000;background:#FFF}body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,textarea,p,blockquote,th,td{margin:0;padding:0}table{border-collapse:collapse;border-spacing:0}fieldset,img{border:0}address,caption,cite,code,dfn,em,strong,th,var{font-style:normal;font-weight:normal}ol,ul{list-style:none}caption,th{text-align:left}h1,h2,h3,h4,h5,h6{font-size:100%;font-weight:normal}q:before,q:after{content:''}abbr,acronym{border:0;font-variant:normal}sup{vertical-align:text-top}sub{vertical-align:text-bottom}input,textarea,select{font-family:inherit;font-size:inherit;font-weight:inherit}input,textarea,select{*font-size:100%}legend{color:#000}
+		html{ background-color:#000; }
+		body { margin:20px; color:#CCC; background-color:#000; font-size:12px; font-family:sans-serif; }
+		h1, strong{ font-weight:bold; color:#FFF; }
+		h1 { font-size: 14px; text-transform: uppercase; }
+		#content { width:640px; height:360px; margin: 0 auto; }
+		ul, p, h1 { margin: 10px 0; }
+		a { color:#FFF; }
 	</style>
 </head>
 <body>
-	<div id="altContent">
-		<h1>ludum-dare-29</h1>
-		<p><a href="http://www.adobe.com/go/getflashplayer">Get Adobe Flash player</a></p>
+	<div id="content">
+		<div id="altContent">
+			<a href="http://www.adobe.com/go/getflashplayer">Get Adobe Flash player</a>
+		</div>
+		<h1>Mount!</h1>
+		<p>Created in one weekend during the Ludum dare #29 (April 25th-28th 2014).<br>
+		<strong>Theme:</strong> Beneath the Surface</p>
+		<ul>
+			<li><strong>Move:</strong> arrow keys</li>
+			<li><strong>Jump:</strong> spacebar</li>
+			<li><strong>Objective:</strong> don't fall into the lava</li>
+		</ul>
+		
+		<ul>
+			<li><strong>Language:</strong> Haxe</li>
+			<li><strong>Author:</strong> <a href="http://namide.com">Namide</a></li>
+			<li><strong>Sources:</strong> <a href="https://github.com/Namide/ludum-dare-29">GitHub</a></li>
+		</ul>
 	</div>
+	
+	<script>
+		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+		ga('create', 'UA-4251629-11', 'namide.com');
+		ga('send', 'pageview');
+	</script>
 </body>
 </html>
