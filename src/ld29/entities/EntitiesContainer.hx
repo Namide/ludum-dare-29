@@ -80,4 +80,13 @@ class EntitiesContainer
 					);
 	}
 	
+	public function getAllActives():Iterable<Entity>
+	{
+		return Lambda.concat( _entitiesRocks, [_entityPlayer] );
+	}
+	
+	public function getAllRocks():Iterable<Entity>
+	{
+		return _entitiesRocks;
+	}
 }

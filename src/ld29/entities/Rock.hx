@@ -21,14 +21,17 @@ class Rock extends Entity
 	private var _ground:Ground;
 	private var _near:Float;
 	
-	public function new( direction:Point, ground:Ground) 
+	private var _rockDecal:Float;
+	
+	public function new( direction:Point, ground:Ground, maxDecal:Float ) 
 	{
 		_ground = ground;
+		_rockDecal = maxDecal;
 		
 		_near = Math.random();
 		
-		var width:UInt = Math.round(16 + 16 * _near);
-		var height:UInt = Math.round(16 + 16 * _near);
+		var width:UInt = 32 + Rng.getInstance().get( 64 );
+		var height:UInt = width;
 		_velocity = StageSettings.SPEED_IN;
 		
 		
@@ -46,18 +49,24 @@ class Rock extends Entity
 		
 		_direction = direction;
 		
-		init(true);
+		//init( _rockDecal );
 	}
 	
-	private function init(first:Bool = false):Void
+	public function init( decal:Float = -1 ):Void
 	{
-		x = StageSettings.W;
-		var y2:Float = _ground.getY(StageSettings.W);
+		if ( decal < 0 ) decal = _rockDecal;
+		
+		x = StageSettings.W + decal;
+		var y2:Float = _ground.getY(x);
 		y = y2 - Rng.getInstance().get( 50 );
 		
 		vX = -3;
 		vY = 0;
-		weight = Math.random() * 0.1;
+		
+		var minWeight:Float = 0.02;
+		var maxWeight:Float = 0.05;
+		
+		weight = Math.random() * (maxWeight - minWeight) + minWeight;
 	}
 	
 	public override function updateInputs( speed:Float ):Void

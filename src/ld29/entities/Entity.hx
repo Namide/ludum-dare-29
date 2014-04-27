@@ -54,7 +54,7 @@ class Entity
 		if ( x + w <= entity.x ) 		return false;
 		if ( y + h <= entity.y ) 		return false;
 		if ( x > entity.x + entity.w ) 	return false;
-		if ( x > entity.y + entity.h ) 	return false;
+		if ( y > entity.y + entity.h ) 	return false;
 		return true;
 	}
 	

@@ -74,8 +74,16 @@ class GameEngine extends Sprite
 		
 		
 		// ROCKS
-		var rock:Entity = new Rock( _slope, _ground );
-		_entitiesContainer.add( rock );
+		var numRock:Int = 5;
+		var decal:Float = StageSettings.W * 0.5 * numRock;
+		for ( i in 0...numRock )
+		{
+			var rock:Rock = new Rock( _slope, _ground, decal );
+			rock.init( decal * (i+1) / numRock );
+			_entitiesContainer.add( rock );
+		}
+		/*var rock:Entity = new Rock( _slope, _ground );
+		_entitiesContainer.add( rock );*/
 		
 		
 		// RENDER
@@ -139,13 +147,16 @@ class GameEngine extends Sprite
 		_speed = 1 + _gameTime / 10000;
 		
 		var allEntities:Iterable<Entity> = _entitiesContainer.getAll();
+		var allEntitiesActive:Iterable<Entity> = _entitiesContainer.getAllActives();
+		var allEntitiesRock:Iterable<Entity> = _entitiesContainer.getAllRocks();
 		
 		for ( entity in allEntities )
 		{
 			entity.updateInputs( _speed );
 		}
 		
-		_physicEngine.updatePos( allEntities, _ground );
+		_physicEngine.updatePos( allEntitiesActive, _ground );
+		_physicEngine.updateCollide( _player, allEntitiesRock );
 		_physicEngine.updateVelocity( allEntities, _ground );
 		
 		return allEntities;

@@ -2,6 +2,7 @@ package ld29.physicEngine;
 import flash.geom.Point;
 import ld29.entities.Entity;
 import ld29.entities.Ground;
+import ld29.entities.Player;
 
 /**
  * ...
@@ -19,16 +20,59 @@ class PhysicEngine
 		
 	}
 	
-	public function updatePos( entities:Iterable<Entity>, ground:Ground ):Void
+	public function updateCollide( player:Player, rocks:Iterable<Entity> ):Void
+	{
+		for ( rock in rocks )
+		{
+			if ( player.hitTest(rock) )
+			{
+				var x:Float = (rock.x + rock.w) - (player.x + player.w);
+				var y:Float = (rock.y + rock.h) - (player.y + player.h);
+				
+				//trace( x, y );
+				
+				if ( Math.abs(y) > Math.abs(x) )
+				{
+					if ( x < 0 )
+					{
+						player.x = rock.x + rock.w;
+						if ( player.vX < 0 ) player.vX = rock.vX;
+					}
+					else
+					{
+						player.x = rock.x - player.w;
+						if ( player.vX > 0 ) player.vX = rock.vX;
+					}
+					player.vY = rock.vY;
+				}
+				else
+				{
+					if ( y < 0 )
+					{
+						player.y = rock.y + rock.h;
+						if ( player.vY < 0 ) player.vY = rock.vY;
+					}
+					else
+					{
+						player.y = rock.y - player.h;
+						if ( player.vY > 0 ) player.vY = rock.vY;
+					}
+					player.vX = rock.vX;
+				}
+			}
+		}
+	}
+	
+	public function updatePos( entitiesActive:Iterable<Entity>, ground:Ground ):Void
 	{
 		var x:Float, y:Float;
-		for ( entity in entities )
+		for ( entity in entitiesActive )
 		{
-			if ( entity.type == Entity.TYPE_GRAPHIC_UNDER || 
+			/*if ( entity.type == Entity.TYPE_GRAPHIC_UNDER || 
 				 entity.type == Entity.TYPE_GRAPHIC_OVER	)
 			{
 				continue;
-			}
+			}*/
 			
 			if ( entity.onGround ) entity.onGround = false;
 			
@@ -67,6 +111,7 @@ class PhysicEngine
 			
 			x = entity.x + entity.w * 0.5;
 			y = entity.y + entity.anchorY;
+			
 			if ( (entity.vY > 0 || entity.vX > 0) && ground.isUnder( x, y ) )
 			{
 				p.setTo( entity.vX, entity.vY );
